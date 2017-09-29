@@ -1,5 +1,5 @@
-jupyter notebook
+jupyter
 pandas
-sklearn
+scikit-learn
 
 
