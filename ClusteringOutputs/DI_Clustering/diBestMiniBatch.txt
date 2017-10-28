@@ -1,1 +1,1 @@
-Num clusters 29Silhouette score 0.165980786549
+Num clusters 29Silhouette score 0.442552945717
