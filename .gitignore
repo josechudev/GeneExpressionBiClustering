@@ -35,6 +35,6 @@ config.rst
 
 /.project
 /.pydevproject
-Dc/
-Di/
-Tt/
+data/Dc/
+data/Di/
+data/Tt/
