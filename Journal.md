@@ -6,3 +6,7 @@
 - Entry 12/12/2017
   - Start using biclustering included in scikit-learn, first try with spectral coclustering
   - Trying to visualize the generated biclusters
+  Suggestions:
+  - Use .iloc instead of brackets
+  - Use other colors in order to difference the biclusters
+ 
