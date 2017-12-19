@@ -10,3 +10,6 @@
   - Use .iloc instead of brackets
   - Use other colors in order to difference the biclusters
  
+- Entry 18/12/2017
+  - MSR implemantation
+  - Looking for other solutions like a analysis of variance 
