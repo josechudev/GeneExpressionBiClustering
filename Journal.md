@@ -13,3 +13,7 @@
 - Entry 18/12/2017
   - MSR implemantation
   - Looking for other solutions like a analysis of variance 
+  
+- Entry 12/01/2018
+  - Odibat notebook created
+  - Differente coherence and correlations created. This ones were created so as to measure if exists a direct or an indirect relationship between vectors.
