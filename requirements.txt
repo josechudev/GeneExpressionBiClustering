@@ -2,5 +2,8 @@ jupyter
 pandas
 scikit-learn
 scipy
+spherecluster
+matplotlib
+seaborn
 
 
