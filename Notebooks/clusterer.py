@@ -1,4 +1,5 @@
-import metrics
+from metrics import *
+import numpy as np
 
 class BisectingClusterer(object):
     def __init__(self, data):
@@ -17,6 +18,27 @@ class BisectingClusterer(object):
         bisecting_indices = self._bisect_clusters_(self._centroids)
         return bisecting_indices
     
+    def fit_rows(self):
+        return self.fit
+    
+    def fit_cols(self):
+        data = self._data.T
+        aux_I, aux_J = data.shape
+        min_correlation = 1
+        last_index = 0
+        for i in range(aux_I - 1):
+            correlation = PositiveNegativeCorrelation(data[i],
+                                                      data[+1],
+                                                      aux_J).H_pos
+            if (correlation<min_correlation):
+                min_correlation = correlation
+                last_index = i
+        indices = np.ones(aux_I)
+        zeros = np.zeros(last_index)
+        indices[0:last_index] = zeros
+        return indices
+        
+            
     def _compute_centroids_(self):
         max_correlation = 0
         centroids = [0,0]

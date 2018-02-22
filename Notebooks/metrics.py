@@ -1,6 +1,5 @@
 import numpy as np
-
-
+import math
 class PositiveNegativeCorrelation(object):
     def __init__(self, x, y, J):
         self._x = x
