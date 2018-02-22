@@ -1,3 +1,5 @@
+import metrics
+
 class BisectingClusterer(object):
     def __init__(self, data):
         if data is not None:
