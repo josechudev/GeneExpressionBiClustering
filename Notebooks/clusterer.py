@@ -19,7 +19,7 @@ class BisectingClusterer(object):
         return bisecting_indices
     
     def fit_rows(self):
-        return self.fit
+        return self.fit()
     
     def fit_cols(self):
         data = self._data.T
