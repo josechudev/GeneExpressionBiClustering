@@ -72,6 +72,6 @@ class PairBasedCoherence(object):
                 H0 = correlation.H_pos
                 # H0 = max(correlation.H_pos,correlation.H_neg)
                 HP += H0
-        HP *= math.fabs(2.0)/(math.fabs(self._I)*(math.fabs(self._I)-1)) # if self._I > 1 else 0
+        HP *= math.fabs(2.0)/(math.fabs(self._I)*(math.fabs(self._I)-1)) if self._I > 1 else 0
         
-        return HP
+        return HP if HP < 1 else 0
