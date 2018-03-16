@@ -5,5 +5,6 @@ scipy
 spherecluster
 matplotlib
 seaborn
+plotly
 
 
