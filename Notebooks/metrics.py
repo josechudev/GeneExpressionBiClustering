@@ -75,3 +75,57 @@ class PairBasedCoherence(object):
         HP *= math.fabs(2.0)/(math.fabs(self._I)*(math.fabs(self._I)-1)) if self._I > 1 else 0
         
         return HP if HP < 1 else 0
+class MSR(object):
+    def __init__(self,data):
+        self.data=data
+        self.n, self.m = data.shape
+        self.aiJ = np.mean(data,axis=1)
+        self.aIj = np.mean(data,axis=0)
+        self.aIJ = np.mean(data)
+        self._H = None
+        self._HiJ = None
+        self._HIj = None
+    
+    @property
+    def H(self):
+        if self._H is None:
+            
+            self._H = self._compute_H()
+            
+        return 1-self._H
+        
+    @property
+    def HiJ(self):
+        if self._HiJ is None:
+            self._HiJ = self._compute_HiJ()
+        return self._HiJ
+    
+    @property
+    def HIj(self):
+        if self._HIj is None:
+            self._HIj = self._compute_HIj()
+        return self._HIj
+    
+    def _compute_H(self):
+        H = 0
+        for i in range(self.n):
+            for j in range(self.m):
+                H  += (self.data[i,j] - self.aIj[j] - self.aiJ[i] + self.aIJ ) ** 2
+        H *= 1.0/(self.n * self.m)       
+        return H
+    
+    def _compute_HiJ(self):
+        HiJ = np.zeros(self.n)
+        for i in range(self.n):
+            for j in range(self.m):
+                HiJ[i] += ( self.data[i,j] - self.aIj[j] - self.aiJ[i] + self.aIJ )**2
+        HiJ *= 1.0/self.m
+        return HiJ
+
+    def _compute_HIj(self):
+        HIj = np.zeros(self.m)
+        for j in range(self.m):
+            for i in range(self.n):
+                HIj[j] += ( self.data[i,j] - self.aIj[j] - self.aiJ[i] + self.aIJ )**2
+        HIj *= 1.0/self.n
+        return HIj
