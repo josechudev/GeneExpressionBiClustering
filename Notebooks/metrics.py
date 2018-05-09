@@ -1,5 +1,6 @@
 import numpy as np
 import math
+
 class PositiveNegativeCorrelation(object):
     def __init__(self, x, y, J):
         self._x = x
@@ -129,3 +130,56 @@ class MSR(object):
                 HIj[j] += ( self.data[i,j] - self.aIj[j] - self.aiJ[i] + self.aIJ )**2
         HIj *= 1.0/self.n
         return HIj
+    
+
+def three_dimensional_correlation(x, y):
+    
+    _x = x
+    _y = y
+    mean_point_x = np.mean(_x, axis=0)
+    mean_point_y = np.mean(_y, axis=0)
+    _J = len(_x)
+    
+    acc = 0
+    
+    for j in range(0,_J):
+        
+        x_axis_diff = _x[j][0] - mean_point_x[0]
+        y_axis_diff = _x[j][1] - mean_point_x[1]
+        
+        x_distance = math.hypot(x_axis_diff, y_axis_diff)
+        
+        x_axis_diff = _y[j][0] - mean_point_y[0]
+        y_axis_diff = _y[j][1] - mean_point_y[1]
+        
+        y_distance = math.hypot(x_axis_diff, y_axis_diff)
+        
+        diff_term = (x_distance - y_distance) / 2.0
+        
+        diff_term = diff_term ** 2.0
+        
+        acc += diff_term
+        
+    return (1-acc/abs(_J))
+
+def three_dimensional_pair_coherence(X):
+    
+    _I = len(X)
+    HP = 0
+    
+    for i in range(0, len(X)):
+    
+        for j in range(i+1, len(X)):
+            
+            if i == j:
+                
+                break
+                
+            x = X[i]
+            y = X[j]
+            correlation = three_dimensional_correlation(x,y)
+            HP += correlation
+            
+    HP *= math.fabs(2.0)/(math.fabs(_I)*(math.fabs(_I)-1.0)) if _I > 1 else 0
+    
+    return HP
