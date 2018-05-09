@@ -183,3 +183,27 @@ def three_dimensional_pair_coherence(X):
     HP *= math.fabs(2.0)/(math.fabs(_I)*(math.fabs(_I)-1.0)) if _I > 1 else 0
     
     return HP
+
+def three_dimensional_msr(X):
+    
+    _I = X.shape[0]
+    _J = X.shape[1]
+    _XiJ = np.mean(X, axis=1)
+    _XIj = np.mean(X, axis=0)
+    _XIJ = np.mean(X)
+    
+    acc = 0
+    
+    for i in range(_I):
+        
+        tmp = 0
+        
+        for j in range(_J):
+            
+            tmp =  (X[i,j] - _XiJ[i] - _XIj[j] + _XIJ)
+            print(tmp)
+            tmp = (tmp[0]**2 + tmp[1]**2)**1/2
+            acc += tmp
+    acc = 1-(acc/(_I*_J))
+        
+    return acc
