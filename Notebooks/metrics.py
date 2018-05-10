@@ -1,5 +1,6 @@
 import numpy as np
 import math
+
 class PositiveNegativeCorrelation(object):
     def __init__(self, x, y, J):
         self._x = x
@@ -129,3 +130,37 @@ class MSR(object):
                 HIj[j] += ( self.data[i,j] - self.aIj[j] - self.aiJ[i] + self.aIJ )**2
         HIj *= 1.0/self.n
         return HIj
+    
+
+
+def three_dimensional_msr(X):
+    
+    _I = X.shape[0]
+    _J = X.shape[1]
+    _XiJ = np.mean(X, axis=1)
+    _XIj = np.mean(X, axis=0)
+    # _XIJ = np.mean(X)
+    _XIJ = np.mean(_XiJ, axis = 0)
+    acc = 0
+    
+    for i in range(_I):
+        
+        tmp = 0
+        
+        for j in range(_J):
+            
+            tmp =  (X[i,j] - _XiJ[i] - _XIj[j] + _XIJ)
+            tmp = (tmp[0]**2 + tmp[1]**2)
+            acc += tmp
+
+    acc = 1-(acc/(_I*_J*2*np.sqrt(2)))
+    
+    return acc
+
+def three_dimensional_coherence(r1, r2):
+    
+    aux_list = list()
+    aux_list.append(r1)
+    aux_list.append(r2)
+    
+    return three_dimensional_msr(np.array(aux_list))
