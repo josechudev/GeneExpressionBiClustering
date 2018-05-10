@@ -190,8 +190,8 @@ def three_dimensional_msr(X):
     _J = X.shape[1]
     _XiJ = np.mean(X, axis=1)
     _XIj = np.mean(X, axis=0)
-    _XIJ = np.mean(X)
-    
+    # _XIJ = np.mean(X)
+    _XIJ = np.mean(_XiJ, axis = 0)
     acc = 0
     
     for i in range(_I):
@@ -201,9 +201,8 @@ def three_dimensional_msr(X):
         for j in range(_J):
             
             tmp =  (X[i,j] - _XiJ[i] - _XIj[j] + _XIJ)
-            print(tmp)
-            tmp = (tmp[0]**2 + tmp[1]**2)**1/2
+            tmp = (tmp[0]**2 + tmp[1]**2)
             acc += tmp
+    
     acc = 1-(acc/(_I*_J))
-        
     return acc
