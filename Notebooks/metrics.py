@@ -155,6 +155,7 @@ def three_dimensional_msr(X):
 
     acc = 1-(acc/(_I*_J*2*np.sqrt(2)))
     
+    acc = acc if acc >= 0 else 0
     return acc
 
 def three_dimensional_coherence(r1, r2):
